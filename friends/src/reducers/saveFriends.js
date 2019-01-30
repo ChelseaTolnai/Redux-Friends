@@ -34,7 +34,7 @@ function saveFriendsReducer(state = initialState, action) {
             ...state,
             friends: [],
             savingFriends: false,
-            savingFriends: false,
+            friendsSaved: false,
             error: action.payload
             }
         default:
