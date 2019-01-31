@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Friends from './components/Friends'
+import FriendListView from './views/FriendsListView'
 import './App.css';
 
 class App extends Component {
@@ -7,7 +7,7 @@ class App extends Component {
     return (
       <div className="App">
         <h1>Friends App</h1>
-        <Friends />
+        <FriendListView />
       </div>
     );
   }

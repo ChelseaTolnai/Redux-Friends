@@ -1,8 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { fetchFriends } from '../actions'
+import FriendsList from '../components/FriendsList';
 
-class Friends extends React.Component {
+class FriendsListView extends React.Component {
 
     componentDidMount() {
         this.props.fetchFriends();
@@ -10,11 +11,11 @@ class Friends extends React.Component {
 
     render() {
         return(
-            <ul>
-                {this.props.friends.map(friend => 
-                    <li key={friend.id}>{friend.name}</li>
-                )}
-            </ul>
+            <div>
+                {this.props.fetchingFriends && <h2>Loading...</h2>}
+                <FriendsList friends={this.props.friends}/>
+                {this.props.error && <h2>{`${this.props.error}`}</h2>}
+            </div>
         )
     }
 };
@@ -29,4 +30,4 @@ const mapStateToProps = state => ({
 export default connect(
     mapStateToProps,
     { fetchFriends }
-)(Friends);
+)(FriendsListView);
