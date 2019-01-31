@@ -2,6 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { fetchFriends } from '../actions'
 import FriendsList from '../components/FriendsList';
+import Error from '../components/Error';
+import Loading from '../components/Loading'
 
 class FriendsListView extends React.Component {
 
@@ -12,9 +14,9 @@ class FriendsListView extends React.Component {
     render() {
         return(
             <div>
-                {this.props.fetchingFriends && <h2>Loading...</h2>}
+                {this.props.fetchingFriends && <Loading />}
                 <FriendsList friends={this.props.friends}/>
-                {this.props.error && <h2>{`${this.props.error}`}</h2>}
+                {this.props.error && <Error error={this.props.error} />}
             </div>
         )
     }
@@ -23,7 +25,6 @@ class FriendsListView extends React.Component {
 const mapStateToProps = state => ({
     friends: state.friendsReducer.friends,
     fetchingFriends: state.friendsReducer.fetchingFriends,
-    friendsFetched: state.friendsReducer.friendsFetched,
     error: state.friendsReducer.error,
 });
 

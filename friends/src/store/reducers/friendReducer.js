@@ -47,7 +47,7 @@ function friendsReducer(state = initialState, action) {
         case FETCHING_FRIENDS_SUCCESSFUL:
             return {
             ...state,
-            friends: action.payload.data,
+            friends: action.payload,
             fetchingFriends: false,
             friendsFetched: true,
             error: null
@@ -63,7 +63,6 @@ function friendsReducer(state = initialState, action) {
         case SAVING_FRIENDS:
             return {
             ...state,
-            friends: [],
             savingFriends: true,
             friendsSaved: false,
             error: null
@@ -79,7 +78,6 @@ function friendsReducer(state = initialState, action) {
         case SAVING_FRIENDS_FAILED:
             return {
             ...state,
-            friends: [],
             savingFriends: false,
             friendsSaved: false,
             error: action.payload
