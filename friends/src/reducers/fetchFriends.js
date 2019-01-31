@@ -24,7 +24,7 @@ function fetchFriendsReducer(state = initialState, action) {
         case FETCHING_FRIENDS_SUCCESSFUL:
             return {
             ...state,
-            friends: action.payload,
+            friends: action.payload.data,
             fetchingFriends: false,
             friendsFetched: true,
             error: null
