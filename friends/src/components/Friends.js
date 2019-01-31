@@ -20,10 +20,10 @@ class Friends extends React.Component {
 };
 
 const mapStateToProps = state => ({
-    friends: state.fetchFriendsReducer.friends,
-    fetchingFriends: state.fetchFriendsReducer.fetchingFriends,
-    friendsFetched: state.fetchFriendsReducer.friendsFetched,
-    error: state.fetchFriendsReducer.error,
+    friends: state.friendsReducer.friends,
+    fetchingFriends: state.friendsReducer.fetchingFriends,
+    friendsFetched: state.friendsReducer.friendsFetched,
+    error: state.friendsReducer.error,
 });
 
 export default connect(
