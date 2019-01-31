@@ -20,7 +20,7 @@ export const fetchFriends = () => dispatch => {
     dispatch({ type: FETCHING_FRIENDS });
     axios
       .get("http://localhost:5000/api/friends")
-      .then(res => dispatch({ type: FETCHING_FRIENDS_SUCCESSFUL, payload: res.data }))
+      .then(res => dispatch({ type: FETCHING_FRIENDS_SUCCESSFUL, payload: res }))
       .catch(err => dispatch({ type: FETCHING_FRIENDS_FAILED, payload: err }));
 };
 
@@ -30,4 +30,12 @@ export const saveFriend = friend => dispatch => {
     .post("http://localhost:5000/api/friends", friend)
     .then(res => dispatch({ type: SAVING_FRIENDS_SUCCESSFUL, payload: res.data }))
     .catch(err => dispatch({ type: SAVING_FRIENDS_FAILED, payload: err }));
+};
+
+export const deleteFriend = id => dispatch => {
+  dispatch({ type: DELETING_FRIEND });
+  axios
+    .delete(`http://localhost:5000/api/friends/${id}`)
+    .then(res => dispatch({ type: DELETING_FRIEND_SUCCESSFUL, payload: res.data }))
+    .catch(err => dispatch({ type: DELETING_FRIEND_FAILED, payload: err }));
 };

@@ -29,7 +29,7 @@ class FriendFormView extends React.Component {
     render() {
         return(
             <div>
-                {this.props.savingFriends && <Loading />}
+                {/* {this.props.savingFriends && <Loading />} */}
                 <FriendForm 
                     friend={this.state.newFriend} 
                     handleInput={this.handleInput} 
