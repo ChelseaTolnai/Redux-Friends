@@ -7,3 +7,27 @@ ul, li {
   padding: 0;
   text-decoration: none;
 }
+
+li {
+  margin: auto;
+  width: 50%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+li span, button {
+  cursor: pointer;
+}
+
+form {
+  margin: 5% auto 0;
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+}
+
+button {
+  background-color: lightgray;
+}
