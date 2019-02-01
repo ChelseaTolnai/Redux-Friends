@@ -2,11 +2,16 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { addFriend, updateFriend } from '../store/actions'
 import FriendForm from '../components/FriendForm'
-import Error from '../components/Error'
 
 class FriendFormView extends React.Component {
     state= {
         friend: {}
+    }
+
+    componentDidMount() {
+        if (this.props.editingFriend) {this.setState(
+            {friend: this.props.selectedFriend}
+        )}
     }
 
     handleInput = e => {
@@ -20,8 +25,8 @@ class FriendFormView extends React.Component {
 
     saveFriend = (e) => {
         e.preventDefault();
-        if (this.props.editingFriendg) {
-            this.props.updateFriend(this.state.friend.id, this.state.friend);
+        if (this.props.editingFriend) {
+            this.props.updateFriend(this.state.friend.id);
             this.setState({friend: {}});
             document.getElementById("friendForm").reset();
         } else {
@@ -34,20 +39,20 @@ class FriendFormView extends React.Component {
     render() {
         return(
             <div>
-                {this.props.editingFriend
+                {/* {this.props.editingFriend
                 ?   <FriendForm 
                     friend={this.props.selectedFriend} 
                     handleInput={this.handleInput} 
                     saveFriend={this.saveFriend}
                     editingFriend={this.props.editingFriend}
                     />
-                :   <FriendForm 
+                :    */}
+                <FriendForm 
                     friend={this.state.friend} 
                     handleInput={this.handleInput} 
                     saveFriend={this.saveFriend}
-                    />
-                }
-                {this.props.error && <Error error={this.props.error} />}
+                />
+                {/* } */}
             </div>
         )
     }

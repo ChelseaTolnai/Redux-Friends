@@ -50,10 +50,10 @@ export const editFriend = friend => {
   }
 };
 
-export const updateFriend = (id, friend) => dispatch => {
+export const updateFriend = (id) => dispatch => {
   dispatch({ type: UPDATING_FRIEND });
   axios
-    .put(`http://localhost:5000/api/friends/${id}`, friend)
+    .put(`http://localhost:5000/api/friends/${id}`)
     .then(res => dispatch({ type: UPDATING_FRIEND_SUCCESSFUL, payload: res.data }))
     .catch(err => dispatch({ type: UPDATING_FRIEND_FAILED, payload: err }));
 };
