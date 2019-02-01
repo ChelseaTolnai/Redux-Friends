@@ -1,38 +1,52 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { saveFriend } from '../store/actions'
+import { addFriend, updateFriend } from '../store/actions'
 import FriendForm from '../components/FriendForm'
 import Error from '../components/Error'
 
 class FriendFormView extends React.Component {
     state= {
-        newFriend: {}
+        friend: {}
     }
 
     handleInput = e => {
         this.setState({
-            newFriend: {
-            ...this.state.newFriend,
+            friend: {
+            ...this.state.friend,
             [e.target.name]: e.target.value
             }
         });
     };
 
-    addFriend = (e) => {
+    saveFriend = (e) => {
         e.preventDefault();
-        this.props.saveFriend(this.state.newFriend);
-        this.setState({newFriend: {}});
-        document.getElementById("friendForm").reset();
-    };
+        if (this.props.editingFriendg) {
+            this.props.updateFriend(this.state.friend.id, this.state.friend);
+            this.setState({friend: {}});
+            document.getElementById("friendForm").reset();
+        } else {
+            this.props.addFriend(this.state.friend);
+            this.setState({friend: {}});
+            document.getElementById("friendForm").reset();
+        }
+    }
 
     render() {
         return(
             <div>
-                <FriendForm 
-                    friend={this.state.newFriend} 
+                {this.props.editingFriend
+                ?   <FriendForm 
+                    friend={this.props.selectedFriend} 
                     handleInput={this.handleInput} 
-                    addFriend={this.addFriend}
-                />
+                    saveFriend={this.saveFriend}
+                    editingFriend={this.props.editingFriend}
+                    />
+                :   <FriendForm 
+                    friend={this.state.friend} 
+                    handleInput={this.handleInput} 
+                    saveFriend={this.saveFriend}
+                    />
+                }
                 {this.props.error && <Error error={this.props.error} />}
             </div>
         )
@@ -41,9 +55,11 @@ class FriendFormView extends React.Component {
 
 const mapStateToProps = state => ({
     error: state.friendsReducer.error,
+    selectedFriend: state.friendsReducer.selectedFriend,
+    editingFriend: state.friendsReducer.editingFriend,
 });
 
 export default connect(
     mapStateToProps,
-    { saveFriend }
+    { addFriend, updateFriend }
 )(FriendFormView);

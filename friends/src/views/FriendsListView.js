@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { fetchFriends, deleteFriend } from '../store/actions';
+import { fetchFriends, deleteFriend, editFriend } from '../store/actions';
 import FriendsList from '../components/FriendsList';
 import Error from '../components/Error';
 import Loading from '../components/Loading'
@@ -15,6 +15,10 @@ class FriendsListView extends React.Component {
         this.props.deleteFriend(e.target.id);
     }
 
+    showFriend = friend => {
+        this.props.editFriend(friend);
+    }
+
     render() {
         return(
             <div>
@@ -22,6 +26,7 @@ class FriendsListView extends React.Component {
                 <FriendsList 
                     friends={this.props.friends}
                     removeFriend={this.removeFriend}
+                    showFriend={this.showFriend}
                 />
                 {this.props.error && <Error error={this.props.error} />}
             </div>
@@ -37,5 +42,5 @@ const mapStateToProps = state => ({
 
 export default connect(
     mapStateToProps,
-    { fetchFriends, deleteFriend }
+    { fetchFriends, deleteFriend, editFriend }
 )(FriendsListView);

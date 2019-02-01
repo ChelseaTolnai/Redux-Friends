@@ -8,6 +8,8 @@ export const SAVING_FRIENDS = "SAVING_FRIENDS";
 export const SAVING_FRIENDS_SUCCESSFUL = "SAVING_FRIENDS_SUCCESSFUL";
 export const SAVING_FRIENDS_FAILED = "SAVING_FRIENDS_FAILED";
 
+export const EDITING_FRIEND = "EDITING_FRIEND";
+
 export const UPDATING_FRIEND = "UPDATING_FRIEND";
 export const UPDATING_FRIEND_SUCCESSFUL = "UPDATING_FRIEND_SUCCESSFUL";
 export const UPDATING_FRIEND_FAILED = "UPDATING_FRIENDS_FAILED";
@@ -20,11 +22,11 @@ export const fetchFriends = () => dispatch => {
     dispatch({ type: FETCHING_FRIENDS });
     axios
       .get("http://localhost:5000/api/friends")
-      .then(res => dispatch({ type: FETCHING_FRIENDS_SUCCESSFUL, payload: res }))
+      .then(res => dispatch({ type: FETCHING_FRIENDS_SUCCESSFUL, payload: res.data }))
       .catch(err => dispatch({ type: FETCHING_FRIENDS_FAILED, payload: err }));
 };
 
-export const saveFriend = friend => dispatch => {
+export const addFriend = friend => dispatch => {
   dispatch({ type: SAVING_FRIENDS });
   axios
     .post("http://localhost:5000/api/friends", friend)
@@ -38,4 +40,20 @@ export const deleteFriend = id => dispatch => {
     .delete(`http://localhost:5000/api/friends/${id}`)
     .then(res => dispatch({ type: DELETING_FRIEND_SUCCESSFUL, payload: res.data }))
     .catch(err => dispatch({ type: DELETING_FRIEND_FAILED, payload: err }));
+};
+
+export const editFriend = friend => {
+  console.log(friend);
+  return {
+    type: EDITING_FRIEND,
+    payload: friend
+  }
+};
+
+export const updateFriend = (id, friend) => dispatch => {
+  dispatch({ type: UPDATING_FRIEND });
+  axios
+    .put(`http://localhost:5000/api/friends/${id}`, friend)
+    .then(res => dispatch({ type: UPDATING_FRIEND_SUCCESSFUL, payload: res.data }))
+    .catch(err => dispatch({ type: UPDATING_FRIEND_FAILED, payload: err }));
 };

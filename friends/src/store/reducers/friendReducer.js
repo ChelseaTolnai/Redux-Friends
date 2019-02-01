@@ -7,6 +7,8 @@ import {
     SAVING_FRIENDS_SUCCESSFUL,
     SAVING_FRIENDS_FAILED,
 
+    EDITING_FRIEND,
+
     UPDATING_FRIEND,
     UPDATING_FRIEND_SUCCESSFUL,
     UPDATING_FRIEND_FAILED,
@@ -24,6 +26,9 @@ const initialState = {
 
     savingFriends: false,
     friendsSaved: false,
+
+    editingFriend: false,
+    selectedFriend: {},
 
     updatingFriend: false,
     friendUpdated: false,
@@ -84,10 +89,17 @@ function friendsReducer(state = initialState, action) {
             error: action.payload
             }
 
+        case EDITING_FRIEND:
+            return {
+            ...state,
+            editingFriend: true,
+            selectedFriend: action.payload,
+            error: null
+            }
+
         case UPDATING_FRIEND:
             return {
             ...state,
-            friends: [],
             updatingFriend: true,
             friendUpdated: false,
             error: null
@@ -98,6 +110,7 @@ function friendsReducer(state = initialState, action) {
             friends: action.payload,
             updatingFriend: false,
             friendUpdated: true,
+            editingFriend: false,
             error: null
             }
         case UPDATING_FRIEND_FAILED:

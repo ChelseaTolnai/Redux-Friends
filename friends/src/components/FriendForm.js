@@ -2,7 +2,7 @@ import React from 'react';
 
 const FriendForm = props => {
     return(
-        <form onSubmit={props.addFriend} id="friendForm">
+        <form onSubmit={props.saveFriend} id="friendForm">
             <input
                 type="text"
                 name="name"
@@ -24,9 +24,9 @@ const FriendForm = props => {
                 placeholder="email"
                 value={props.friend.email}
             />
-            <button>
-                Add Friend
-            </button>
+            { !props.editingFriend 
+            ? <button>Add Friend</button>
+            : <button>Update Friend</button>}
         </form>
     )
 };

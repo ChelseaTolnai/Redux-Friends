@@ -5,7 +5,7 @@ const FriendsList = props => {
         <ul>
             {props.friends.map(friend => 
                 <li key={friend.id}>
-                    <span>{friend.name}</span>
+                    <span onClick={() => props.showFriend(friend)}>{friend.name}</span>
                     <span onClick={props.removeFriend} id={friend.id}>X</span>
                 </li>
             )}
